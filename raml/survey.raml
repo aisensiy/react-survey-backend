@@ -26,6 +26,10 @@ schemas:
         body:
           schema: ErrorMessage
   get:
+    headers:
+      Authentication:
+        type: string
+        required: true
     responses:
       200:
         body:
@@ -58,6 +62,10 @@ schemas:
   /{userId}:
     get:
       description: Get user info
+      headers:
+        Authentication:
+          type: string
+          required: true
       responses:
         200:
           body:
@@ -65,6 +73,10 @@ schemas:
         404:
     /surveys:
       post:
+        headers:
+          Authentication:
+            type: string
+            required: true
         description: Create new survey
         body:
           schema: |
@@ -88,6 +100,10 @@ schemas:
             description: user not currentUser
       get:
         description: Get user's surveys
+        headers:
+          Authentication:
+            type: string
+            required: true
         responses:
           200:
             body:
@@ -104,6 +120,17 @@ schemas:
             schema: Survey
         404:
           description: false survey.receiveResults and currentUser not survey.author
+    put:
+      headers:
+        Authentication:
+          type: string
+          required: true
+      description: Update survey info
+      body:
+        schema: Survey
+      responses:
+        204:
+        404:
     /results:
       get:
         description: Get all survey results
@@ -129,3 +156,12 @@ schemas:
         responses:
           201:
           400:
+      /{resultId}:
+        delete:
+          headers:
+            Authentication:
+              type: string
+              required: true
+          responses:
+            204:
+            404:

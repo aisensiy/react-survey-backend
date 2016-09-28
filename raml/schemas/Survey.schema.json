@@ -16,10 +16,10 @@
       "type": "boolean"
     },
     "createdAt": {
-      "type": "datetime"
+      "type": "string"
     },
     "updatedAt": {
-      "type": "datetime"
+      "type": "string"
     }
   },
   "required": ["title", "subTitle", "questions"]
