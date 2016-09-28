@@ -3,9 +3,24 @@ import fetcher from './fetcher';
 var router = new Router();
 var _ = require('lodash');
 
+function auth(req, res, next) {
+  if (!req.headers.authentication) {
+    res.status(401).end();
+  }
+  fetcher.get('/users/me', {
+    headers: {
+      'X-LC-Session': req.headers.authentication
+    }
+  }).then((response) => {
+    req.currentUser = response.data;
+    next();
+  }).catch(err => {
+    res.status(401).json(err.response.data);
+  });
+}
+
 router.post('/', function (req, res) {
   let userParams = req.body;
-  console.log(userParams);
   fetcher.get('/users', {
     params: {
       where: {
@@ -29,8 +44,40 @@ router.post('/', function (req, res) {
   }).then(response => {
     res.status(201).json(response.data);
   }).catch(err => {
-    console.log(err);
     res.status(err.statusCode ? err.statusCode : 500).json(err);
+  });
+});
+
+router.post('/{userId}/surveys', {userId: {type: 'string'}}, auth, (req, res) => {
+  var newSurvey = req.body;
+  newSurvey.author = {
+    __type: 'Pointer',
+    className: '_User',
+    objectId: req.currentUser.objectId
+  };
+
+  fetcher.post('/classes/Survey', newSurvey).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err.response.data);
+  });
+});
+
+router.get('/{userId}/surveys', {userId: {type: 'string'}}, auth, (req, res) => {
+  fetcher.get('/classes/Survey', {
+    params: {
+      where: {
+        author: {
+          __type: 'Pointer',
+          className: '_User',
+          objectId: req.currentUser.objectId
+        }
+      }
+    }
+  }).then(response => {
+    res.status(201).json(response.data.results);
+  }).catch(err => {
+    res.status(500).json(err.response.data);
   });
 });
 
