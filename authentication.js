@@ -5,10 +5,14 @@ var router = new Router();
 import fetcher from './fetcher';
 
 router.get('/', function(req, res) {
-  fetcher.get('/users/me').then(res => {
-    res.json(res.data);
+  fetcher.get('/users/me', {
+    headers: {
+      'X-LC-Session': req.headers.authentication
+    }
+  }).then(response => {
+    res.json(response.data);
   }).catch(err => {
-    res.status(401).end();
+    res.status(401).json(err.response.data);
   });
 });
 
