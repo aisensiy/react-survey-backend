@@ -81,12 +81,19 @@ schemas:
                 }
               }
             }
+        responses:
+          201:
+          400:
+          403:
+            description: user != currentUser
       get:
         description: Get user's surveys
         responses:
           200:
             body:
               schema: Surveys
+          403:
+            description: user != currentUser
 /surveys:
   /{surveyId}:
     get:
@@ -95,6 +102,8 @@ schemas:
         200:
           body:
             schema: Survey
+        404:
+          description: !survey.receiveResults && currentUser != survey.author
     /results:
       get:
         description: Get all survey results
@@ -108,6 +117,8 @@ schemas:
                     "type": "object"
                   }
                 }
+          403:
+            description: !surveyPublishResults && survey.author != currentUser
       post:
         description: Fill survey
         body:
