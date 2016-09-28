@@ -1,0 +1,30 @@
+{
+  "name": "react-survey-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aisensiy/react-survey-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aisensiy/react-survey-backend/issues"
+  },
+  "homepage": "https://github.com/aisensiy/react-survey-backend#readme",
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "nodemon": "^1.10.2"
+  },
+  "dependencies": {
+    "axios": "^0.14.0",
+    "express": "^4.14.0"
+  }
+}
