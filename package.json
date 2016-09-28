@@ -26,6 +26,7 @@
   "dependencies": {
     "axios": "^0.14.0",
     "express": "^4.14.0",
+    "express-cors": "0.0.3",
     "lodash": "^4.16.2",
     "osprey": "^0.3.2"
   }

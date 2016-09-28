@@ -4,6 +4,7 @@ var join = require('path').join;
 var app = express();
 var users = require('./users');
 var authentication = require('./authentication');
+var cors = require('express-cors');
 
 var path = join(__dirname, 'raml/survey.raml');
 
@@ -11,6 +12,11 @@ var path = join(__dirname, 'raml/survey.raml');
 // want to use each one separately instead - `osprey.server`, etc.
 osprey.loadFile(path)
     .then(function (middleware) {
+      app.use(cors({
+        allowedOrigins: ['http://localhost:3000'],
+        headers: ['Authentication', 'X-LC-Session', 'Content-Type']
+      }));
+
       app.use(middleware);
 
       app.use('/authentication', authentication);
