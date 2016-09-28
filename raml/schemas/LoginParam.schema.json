@@ -2,12 +2,11 @@
   "type": "object",
   "properties": {
     "username": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "password": {
-      "type": "string",
-      "required": true
+      "type": "string"
     }
-  }
+  },
+  "required": ["username", "password"]
 }

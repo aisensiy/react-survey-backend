@@ -85,7 +85,7 @@ schemas:
           201:
           400:
           403:
-            description: user != currentUser
+            description: user not currentUser
       get:
         description: Get user's surveys
         responses:
@@ -93,7 +93,7 @@ schemas:
             body:
               schema: Surveys
           403:
-            description: user != currentUser
+            description: user not currentUser
 /surveys:
   /{surveyId}:
     get:
@@ -103,7 +103,7 @@ schemas:
           body:
             schema: Survey
         404:
-          description: !survey.receiveResults && currentUser != survey.author
+          description: false survey.receiveResults and currentUser not survey.author
     /results:
       get:
         description: Get all survey results
@@ -118,7 +118,7 @@ schemas:
                   }
                 }
           403:
-            description: !surveyPublishResults && survey.author != currentUser
+            description: false surveyPublishResults and survey.author not currentUser
       post:
         description: Fill survey
         body:
