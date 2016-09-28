@@ -3,6 +3,7 @@ var express = require('express');
 var join = require('path').join;
 var app = express();
 var users = require('./users');
+var surveys = require('./surveys');
 var authentication = require('./authentication');
 var cors = require('express-cors');
 
@@ -21,6 +22,7 @@ osprey.loadFile(path)
 
       app.use('/authentication', authentication);
       app.use('/users', users);
+      app.use('/surveys', surveys);
 
       app.listen(8000)
     })
