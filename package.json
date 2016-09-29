@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec babel-node src/index.js",
-    "prestart": "babel src --out-dir dist",
+    "prestart": "node ./node_modules/babel-cli/bin/babel.js src --out-dir dist",
     "start": "node dist/index.js"
   },
   "engines": {

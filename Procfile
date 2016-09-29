@@ -1,1 +1,1 @@
-web: babel src --out-dir dist && node dist/index.js
+web: node ./node_modules/babel-cli/bin/babel.js src --out-dir dist && node dist/index.js
