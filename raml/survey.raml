@@ -13,6 +13,7 @@ schemas:
   - UserResponse: !include schemas/UserResponse.schema.json
   - Surveys: !include schemas/Surveys.schema.json
   - Survey: !include schemas/Survey.schema.json
+  - PutSurvey: !include schemas/PutSurvey.schema.json
 
 /authentication:
   post:
@@ -127,7 +128,7 @@ schemas:
           required: true
       description: Update survey info
       body:
-        schema: Survey
+        schema: PutSurvey
       responses:
         204:
         404:

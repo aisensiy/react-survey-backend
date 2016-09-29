@@ -49,6 +49,12 @@ router.post('/', function (req, res) {
 });
 
 router.post('/{userId}/surveys', {userId: {type: 'string'}}, auth, (req, res) => {
+  if (req.params.userId !== req.currentUser.objectId) {
+    res.status(403).json({
+      message: 'No authorization to create survey'
+    });
+    return;
+  }
   var newSurvey = req.body;
   newSurvey.author = {
     __type: 'Pointer',
@@ -64,6 +70,12 @@ router.post('/{userId}/surveys', {userId: {type: 'string'}}, auth, (req, res) =>
 });
 
 router.get('/{userId}/surveys', {userId: {type: 'string'}}, auth, (req, res) => {
+  if (req.params.userId !== req.currentUser.objectId) {
+    res.status(403).json({
+      message: 'No authorization to view other\'s surveys'
+    });
+  }
+
   fetcher.get('/classes/Survey', {
     params: {
       where: {
