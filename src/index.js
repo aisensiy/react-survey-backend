@@ -14,7 +14,7 @@ var path = join(__dirname, '../raml/survey.raml');
 osprey.loadFile(path)
     .then(function (middleware) {
       app.use(cors({
-        allowedOrigins: process.env.ORIGINS.split(','),
+        allowedOrigins: (process.env.ORIGINS || '*').split(','),
         headers: ['Authentication', 'X-LC-Session', 'Content-Type']
       }));
 
