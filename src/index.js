@@ -24,6 +24,6 @@ osprey.loadFile(path)
       app.use('/users', users);
       app.use('/surveys', surveys);
 
-      app.listen(process.env.PORT || 5000)
+      app.listen(process.env.LEANCLOUD_APP_PORT || 3000)
     })
     .catch(function(e) { console.error("Error: %s", e.message); });
