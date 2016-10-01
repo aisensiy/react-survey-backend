@@ -8,6 +8,12 @@ var authentication = require('./authentication');
 var cors = require('express-cors');
 var av = require('leanengine');
 
+av.init({
+  appId: process.env.LEANCLOUD_APP_ID,
+  appKey: process.env.LEANCLOUD_APP_KEY,
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
+});
+
 var path = join(__dirname, '../raml/survey.raml');
 
 // Be careful, this uses all middleware functions by default. You might just
