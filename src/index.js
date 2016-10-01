@@ -6,6 +6,7 @@ var users = require('./users');
 var surveys = require('./surveys');
 var authentication = require('./authentication');
 var cors = require('express-cors');
+var av = require('leanengine');
 
 var path = join(__dirname, '../raml/survey.raml');
 
@@ -18,6 +19,7 @@ osprey.loadFile(path)
         headers: ['Authentication', 'X-LC-Session', 'Content-Type']
       }));
 
+      app.use(av.express());
       app.use(middleware);
 
       app.use('/authentication', authentication);
