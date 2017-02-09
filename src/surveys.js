@@ -115,4 +115,12 @@ router.post('/{surveyId}/results', {surveyId: {type: 'string'}}, auth, function(
   });
 });
 
+router.delete('/{surveyId}/results/{resultId}', {surveyId: {type: 'string'}, resultId: {type: 'string'}}, auth, function(req, res) {
+  fetcher.delete('/classes/Result/' + req.params.resultId).then(response => {
+    res.status(204).end();
+  }).catch(err => {
+    res.status(500).json(err.response.data);
+  });
+});
+
 module.exports = router;
